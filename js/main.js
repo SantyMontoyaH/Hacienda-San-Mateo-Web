@@ -82,27 +82,39 @@
   let fotoNombre = "";
   const showFoto = (i) => {
     fotoIndex = (i + fotos.length) % fotos.length;
+    const foto = fotos[fotoIndex];
     const img = $("#modalImg");
-    img.src = fotos[fotoIndex];
+    img.src = foto.img;
+    // URL absoluta: dentro de una variable CSS se resolvería respecto a styles.css
+    $("#modalFrame").style.setProperty("--foto", `url("${new URL(foto.img, location.href)}")`);
     img.alt = fotos.length > 1 ? `${fotoNombre} San Mateo, foto ${fotoIndex + 1} de ${fotos.length}` : `${fotoNombre} San Mateo`;
     img.style.animation = "none";
     void img.offsetWidth; // reinicia la animación de entrada
     img.style.animation = "";
     $$("button", thumbs).forEach((b, j) => { b.classList.toggle("is-active", j === fotoIndex); b.setAttribute("aria-current", String(j === fotoIndex)); });
+    $$("#modalItems li").forEach((li) => li.classList.toggle("is-active", !!foto.items?.includes(li.dataset.item)));
   };
+  // Foto más específica de una presentación: la que muestra menos presentaciones además de esa.
+  const fotoDe = (item) => fotos.reduce((best, f, i) =>
+    f.items?.includes(item) && (best < 0 || f.items.length < fotos[best].items.length) ? i : best, -1);
   const openModal = (cat) => {
     lastFocus = document.activeElement;
-    fotos = cat.fotos?.length ? cat.fotos : [cat.img];
+    fotos = cat.fotos?.length ? cat.fotos : [{ img: cat.img }];
     fotoNombre = cat.nombre;
     const varias = fotos.length > 1;
     thumbs.innerHTML = varias
-      ? fotos.map((f, i) => `<button data-foto="${i}" aria-label="Ver foto ${i + 1}"><img src="${f}" alt="" loading="lazy"></button>`).join("")
+      ? fotos.map((f, i) => `<button data-foto="${i}" aria-label="Ver foto ${i + 1}"><img src="${f.img}" alt="" loading="lazy"></button>`).join("")
       : "";
     $$(".modal__nav", modal).forEach((b) => { b.hidden = !varias; });
-    showFoto(0);
     $("#modalTitle").textContent = cat.nombre;
     $("#modalDesc").textContent = cat.desc;
-    $("#modalItems").innerHTML = cat.items.map((i) => `<li>${esc(i)}</li>`).join("");
+    $("#modalItems").innerHTML = cat.items.map((i) => {
+      const f = varias ? fotoDe(i) : -1;
+      return f < 0
+        ? `<li data-item="${esc(i)}">${esc(i)}</li>`
+        : `<li data-item="${esc(i)}"><button data-foto="${f}" aria-label="Ver foto de ${esc(i)}">${esc(i)}</button></li>`;
+    }).join("");
+    showFoto(0);
     modal.hidden = false;
     document.body.style.overflow = "hidden";
     $(".modal__close", modal).focus();

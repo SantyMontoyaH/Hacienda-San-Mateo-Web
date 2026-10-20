@@ -221,9 +221,11 @@
     <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button class="modal__close" data-close aria-label="Cerrar">×</button>
       <div class="modal__media">
-        <img id="modalImg" alt="">
-        <button class="modal__nav modal__nav--prev" data-foto="prev" aria-label="Foto anterior" hidden>‹</button>
-        <button class="modal__nav modal__nav--next" data-foto="next" aria-label="Foto siguiente" hidden>›</button>
+        <div class="modal__frame" id="modalFrame">
+          <img id="modalImg" alt="">
+          <button class="modal__nav modal__nav--prev" data-foto="prev" aria-label="Foto anterior" hidden>‹</button>
+          <button class="modal__nav modal__nav--next" data-foto="next" aria-label="Foto siguiente" hidden>›</button>
+        </div>
         <div class="modal__thumbs" id="modalThumbs"></div>
       </div>
       <div class="modal__body">

@@ -1,5 +1,5 @@
 // Contenido editable del sitio. Para añadir un producto o una categoría basta con editar este archivo.
-// `fotos` (opcional): imágenes que se muestran en la ventana del producto. Si no hay, se usa `img`.
+// `fotos` (opcional): imágenes de la ventana del producto. `items` indica qué presentaciones salen en cada foto.
 window.SITE = {
   contacto: {
     telefono: "3108540149",
@@ -15,13 +15,23 @@ window.SITE = {
       id: "leche", nombre: "Leche", grupo: "lacteos", img: "assets/img/leche.jpg",
       desc: "Entera, deslactosada y de larga vida. La base de todos los días.",
       items: ["UHT 400 ml", "UHT 900 ml", "UHT 1100 ml", "Media vida 1000 ml", "Media vida 400 ml", "Deslactosada 1100 ml", "Deslactosada 900 ml"],
-      fotos: ["assets/img/productos/leche-1.jpg", "assets/img/productos/leche-2.jpg", "assets/img/productos/leche-3.jpg", "assets/img/productos/leche-4.jpg"],
+      fotos: [
+        { img: "assets/img/productos/leche-1.jpg", items: ["Deslactosada 1100 ml"] },
+        { img: "assets/img/productos/leche-2.jpg" },
+        { img: "assets/img/productos/leche-3.jpg", items: ["Deslactosada 1100 ml"] },
+        { img: "assets/img/productos/leche-4.jpg" },
+      ],
     },
     {
       id: "yogurt", nombre: "Yogurt en vaso", grupo: "lacteos", img: "assets/img/yogurt.jpg",
       desc: "Cremoso y con fruta de verdad, en vaso de 150 ml.",
       items: ["Mora", "Melocotón", "Fresa", "Guanábana", "Feijoa"],
-      fotos: ["assets/img/productos/yogurt-1.jpg", "assets/img/productos/yogurt-2.jpg", "assets/img/productos/yogurt-3.jpg", "assets/img/productos/yogurt-4.jpg"],
+      fotos: [
+        { img: "assets/img/productos/yogurt-1.jpg", items: ["Mora", "Melocotón", "Fresa", "Guanábana", "Feijoa"] },
+        { img: "assets/img/productos/yogurt-2.jpg", items: ["Mora", "Melocotón", "Fresa", "Guanábana", "Feijoa"] },
+        { img: "assets/img/productos/yogurt-3.jpg", items: ["Feijoa", "Fresa"] },
+        { img: "assets/img/productos/yogurt-4.jpg" },
+      ],
     },
     {
       id: "light", nombre: "Yogurt Light", grupo: "lacteos", img: "assets/img/yogurt-mano.jpg",
@@ -32,25 +42,42 @@ window.SITE = {
       id: "familiar", nombre: "Yogurt familiar", grupo: "lacteos", img: "assets/img/kumis-fruta.jpg",
       desc: "Presentaciones de 2000 y 4000 ml para compartir en casa.",
       items: ["Fresa", "Mora", "Melocotón", "Feijoa", "Guanábana"],
-      fotos: ["assets/img/productos/familiar-1.jpg", "assets/img/productos/familiar-2.jpg", "assets/img/productos/familiar-3.jpg"],
+      fotos: [
+        { img: "assets/img/productos/familiar-1.jpg", items: ["Mora"] },
+        { img: "assets/img/productos/familiar-2.jpg", items: ["Fresa"] },
+        { img: "assets/img/productos/familiar-3.jpg", items: ["Fresa", "Mora"] },
+      ],
     },
     {
       id: "kumis", nombre: "Kumis", grupo: "lacteos", img: "assets/img/kumis.jpg",
       desc: "Receta tradicional, perfecto con fruta o granola.",
       items: ["Vaso 150 ml", "Bolsa 750 ml", "Garrafa 2000 ml", "Garrafa 4000 ml"],
-      fotos: ["assets/img/productos/kumis-1.jpg", "assets/img/productos/kumis-2.jpg", "assets/img/productos/kumis-3.jpg"],
+      fotos: [
+        { img: "assets/img/productos/kumis-1.jpg", items: ["Vaso 150 ml"] },
+        { img: "assets/img/productos/kumis-2.jpg", items: ["Vaso 150 ml"] },
+      ],
     },
     {
       id: "quesos", nombre: "Quesos", grupo: "lacteos", img: "assets/img/quesos.jpg",
       desc: "Frescos y de la región, para la arepa, el sándwich o la ensalada.",
       items: ["Doble crema 400 g", "Pera 110 g", "Tajado 400 g", "Campesino 500–5000 g", "Doble crema 5000 g"],
-      fotos: ["assets/img/productos/quesos-1.jpg", "assets/img/productos/quesos-2.jpg", "assets/img/productos/quesos-3.jpg", "assets/img/productos/quesos-4.jpg"],
+      fotos: [
+        { img: "assets/img/productos/quesos-1.jpg", items: ["Doble crema 400 g"] },
+        { img: "assets/img/productos/quesos-2.jpg", items: ["Doble crema 400 g"] },
+        { img: "assets/img/productos/quesos-3.jpg", items: ["Doble crema 400 g"] },
+        { img: "assets/img/productos/quesos-4.jpg", items: ["Doble crema 400 g"] },
+      ],
     },
     {
       id: "arequipe", nombre: "Arequipe", grupo: "lacteos", img: "assets/img/arequipe.jpg",
       desc: "Dulce de leche cremoso para untar, rellenar o comer a cucharadas.",
       items: ["Vaso individual", "Presentación familiar"],
-      fotos: ["assets/img/productos/arequipe-1.jpg", "assets/img/productos/arequipe-2.jpg", "assets/img/productos/arequipe-3.jpg", "assets/img/productos/arequipe-4.jpg"],
+      fotos: [
+        { img: "assets/img/productos/arequipe-1.jpg", items: ["Presentación familiar"] },
+        { img: "assets/img/productos/arequipe-2.jpg", items: ["Vaso individual", "Presentación familiar"] },
+        { img: "assets/img/productos/arequipe-3.jpg", items: ["Vaso individual"] },
+        { img: "assets/img/productos/arequipe-4.jpg", items: ["Presentación familiar"] },
+      ],
     },
     {
       id: "avena", nombre: "Avena", grupo: "bebidas", img: "assets/img/avena.jpg",
@@ -93,14 +120,14 @@ window.SITE = {
   ],
 
   galeria: [
-    { img: "assets/img/desayuno.jpg", alt: "Kumis San Mateo con fruta y granola", ancho: true },
-    { img: "assets/img/arequipe-cuchara.jpg", alt: "Arequipe San Mateo cayendo de una cuchara" },
-    { img: "assets/img/queso-corte.jpg", alt: "Queso San Mateo sobre tabla de madera" },
-    { img: "assets/img/megalitro.jpg", alt: "Leche deslactosada Megalitro con galletas y arequipe", ancho: true },
-    { img: "assets/img/vaso-leche.jpg", alt: "Vaso de leche recién servido" },
-    { img: "assets/img/yogurt-cereal.jpg", alt: "Yogurt con cereal" },
-    { img: "assets/img/ensalada.jpg", alt: "Queso San Mateo en ensalada y wrap", ancho: true },
-    { img: "assets/img/pan-leche.jpg", alt: "Leche Megalitro con pan", ancho: true },
+    { img: "assets/img/galeria/leche-cafe.jpg", alt: "Leche entera y deslactosada San Mateo con café y galletas", ancho: true },
+    { img: "assets/img/galeria/arequipe-cuchara.jpg", alt: "Arequipe San Mateo cayendo de una cuchara" },
+    { img: "assets/img/galeria/fresa-crema.jpg", alt: "Fresa bañada en crema" },
+    { img: "assets/img/galeria/quesos-mesa.jpg", alt: "Quesos San Mateo con ensalada y tomates", ancho: true },
+    { img: "assets/img/galeria/queso-ensalada.jpg", alt: "Queso San Mateo en cubos sobre una ensalada" },
+    { img: "assets/img/galeria/yogurt-cereal.jpg", alt: "Yogurt con cereal San Mateo en el desayuno" },
+    { img: "assets/img/galeria/megalitro-galletas.jpg", alt: "Leche deslactosada Megalitro con galletas y arequipe", ancho: true },
+    { img: "assets/img/galeria/linea.jpg", alt: "Línea de productos San Mateo", ancho: true },
   ],
 
   // Enlaces a la web actual mientras esas secciones se migran.
