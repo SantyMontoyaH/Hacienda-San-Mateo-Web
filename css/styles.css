@@ -279,7 +279,15 @@ p { margin: 0 0 1em; }
   display: grid; grid-template-columns: 1fr 1fr; background: var(--white); border-radius: var(--radius);
   box-shadow: var(--shadow-lg); animation: pop .3s ease;
 }
-.modal__dialog > img { width: 100%; height: 100%; min-height: 280px; object-fit: cover; }
+.modal__media { position: relative; min-height: 420px; background: var(--sky-100); }
+.modal__media > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: fade .3s; }
+.modal__nav { position: absolute; top: 50%; translate: 0 -50%; width: 40px; height: 40px; border: 0; border-radius: 50%; background: rgba(255,255,255,.9); color: var(--blue-900); font-size: 1.6rem; line-height: 1; cursor: pointer; box-shadow: var(--shadow); }
+.modal__nav--prev { left: 12px; }
+.modal__nav--next { right: 12px; }
+.modal__thumbs { position: absolute; left: 0; right: 0; bottom: 12px; display: flex; justify-content: center; gap: 8px; }
+.modal__thumbs button { width: 48px; height: 48px; padding: 0; border: 2px solid transparent; border-radius: 8px; overflow: hidden; cursor: pointer; opacity: .7; box-shadow: var(--shadow); }
+.modal__thumbs button.is-active { border-color: var(--white); opacity: 1; }
+.modal__thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .modal__body { padding: 32px; }
 .modal__body h3 { font-size: 2rem; color: var(--blue-900); }
 .modal__body p { color: var(--muted); }
@@ -288,7 +296,8 @@ p { margin: 0 0 1em; }
 .chips li { padding: .4em .9em; border-radius: 999px; background: var(--sky-100); color: var(--blue-700); font-size: .9rem; font-weight: 600; }
 @media (max-width: 640px) {
   .modal__dialog { grid-template-columns: 1fr; }
-  .modal__dialog > img { min-height: 0; aspect-ratio: 16 / 10; }
+  .modal__media { min-height: 0; aspect-ratio: 1; }
+  .modal__thumbs button { width: 40px; height: 40px; }
   .modal__body { padding: 24px; }
 }
 

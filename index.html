@@ -220,7 +220,12 @@
     <div class="modal__backdrop" data-close></div>
     <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button class="modal__close" data-close aria-label="Cerrar">×</button>
-      <img id="modalImg" alt="">
+      <div class="modal__media">
+        <img id="modalImg" alt="">
+        <button class="modal__nav modal__nav--prev" data-foto="prev" aria-label="Foto anterior" hidden>‹</button>
+        <button class="modal__nav modal__nav--next" data-foto="next" aria-label="Foto siguiente" hidden>›</button>
+        <div class="modal__thumbs" id="modalThumbs"></div>
+      </div>
       <div class="modal__body">
         <h3 id="modalTitle"></h3>
         <p id="modalDesc"></p>

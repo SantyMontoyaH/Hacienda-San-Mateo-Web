@@ -75,11 +75,31 @@
 
   /* ---------- Modal de producto ---------- */
   const modal = $("#modal");
+  const thumbs = $("#modalThumbs");
   let lastFocus = null;
+  let fotos = [];
+  let fotoIndex = 0;
+  let fotoNombre = "";
+  const showFoto = (i) => {
+    fotoIndex = (i + fotos.length) % fotos.length;
+    const img = $("#modalImg");
+    img.src = fotos[fotoIndex];
+    img.alt = fotos.length > 1 ? `${fotoNombre} San Mateo, foto ${fotoIndex + 1} de ${fotos.length}` : `${fotoNombre} San Mateo`;
+    img.style.animation = "none";
+    void img.offsetWidth; // reinicia la animación de entrada
+    img.style.animation = "";
+    $$("button", thumbs).forEach((b, j) => { b.classList.toggle("is-active", j === fotoIndex); b.setAttribute("aria-current", String(j === fotoIndex)); });
+  };
   const openModal = (cat) => {
     lastFocus = document.activeElement;
-    $("#modalImg").src = cat.img;
-    $("#modalImg").alt = cat.nombre;
+    fotos = cat.fotos?.length ? cat.fotos : [cat.img];
+    fotoNombre = cat.nombre;
+    const varias = fotos.length > 1;
+    thumbs.innerHTML = varias
+      ? fotos.map((f, i) => `<button data-foto="${i}" aria-label="Ver foto ${i + 1}"><img src="${f}" alt="" loading="lazy"></button>`).join("")
+      : "";
+    $$(".modal__nav", modal).forEach((b) => { b.hidden = !varias; });
+    showFoto(0);
     $("#modalTitle").textContent = cat.nombre;
     $("#modalDesc").textContent = cat.desc;
     $("#modalItems").innerHTML = cat.items.map((i) => `<li>${esc(i)}</li>`).join("");
@@ -96,7 +116,13 @@
     const card = e.target.closest(".product");
     if (card) openModal(categorias.find((c) => c.id === card.dataset.id));
   });
-  modal.addEventListener("click", (e) => { if (e.target.closest("[data-close]")) closeModal(); });
+  modal.addEventListener("click", (e) => {
+    if (e.target.closest("[data-close]")) return closeModal();
+    const act = e.target.closest("[data-foto]")?.dataset.foto;
+    if (act === "prev") showFoto(fotoIndex - 1);
+    else if (act === "next") showFoto(fotoIndex + 1);
+    else if (act) showFoto(+act);
+  });
 
   /* ---------- Galería + lightbox ---------- */
   const gGrid = $("#galleryGrid");
@@ -135,7 +161,11 @@
       if (e.key === "Escape") closeLb();
       if (e.key === "ArrowLeft") showLb(lbIndex - 1);
       if (e.key === "ArrowRight") showLb(lbIndex + 1);
-    } else if (!modal.hidden && e.key === "Escape") closeModal();
+    } else if (!modal.hidden) {
+      if (e.key === "Escape") closeModal();
+      if (fotos.length > 1 && e.key === "ArrowLeft") showFoto(fotoIndex - 1);
+      if (fotos.length > 1 && e.key === "ArrowRight") showFoto(fotoIndex + 1);
+    }
   });
 
   /* ---------- Contacto ---------- */
