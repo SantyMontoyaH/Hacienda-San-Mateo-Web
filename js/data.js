@@ -90,11 +90,6 @@ window.SITE = {
       items: ["Mora", "Naranja", "Limón", "Mango", "Maracuyá"],
     },
     {
-      id: "postry", nombre: "Postry", grupo: "postres", img: "assets/img/postry.jpg",
-      desc: "Postre cremosito en vaso individual.",
-      items: ["Fresa", "Mora", "Melocotón"],
-    },
-    {
       id: "gelatina", nombre: "Gelatina", grupo: "postres", img: "assets/img/gelatina.jpg",
       desc: "Gelatina lista en vaso de 120 g.",
       items: ["Fresa", "Mora", "Limón"],
